@@ -1,13 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import firebase from 'firebase'
 
-// Initialize Firebase
-var config = {
+import App from './App'
+import reducers from './reducers'
+import registerServiceWorker from './registerServiceWorker'
+
+import './index.css'
+
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+
+const config = {
   apiKey: "AIzaSyBRAxIT3zdKQHvUlpa2-nrVH1dyswDCj8I",
   authDomain: "pwa-bkk.firebaseapp.com",
   databaseURL: "https://pwa-bkk.firebaseio.com",
@@ -18,5 +24,10 @@ var config = {
 
 firebase.initializeApp(config)
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+registerServiceWorker()

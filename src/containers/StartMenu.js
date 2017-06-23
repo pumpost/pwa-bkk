@@ -1,6 +1,7 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
 import firebase from 'firebase'
+import { browserHistory } from 'react-router'
 
 import { user } from '../actions'
 
@@ -21,10 +22,9 @@ class StartGame extends Component {
         email: result.user.email,
         photoURL: result.user.photoURL,
         uid: result.user.uid,
-        status: 'online'
       }
-      this.props.signin(info).then(() => {
-        console.log(11)
+      this.props.signin(info, () => {
+        browserHistory.push('/lobby')
       })
     }).catch((error) => {
       // console.log(error.message)

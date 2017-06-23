@@ -17,7 +17,7 @@ export default () => {
       <Route path="/" component={Layout}>
         <IndexRoute component={StartMenu} />
         <Route path="lobby" component={Lobby} />
-        <Route path="room" component={Room} />
+        <Route path="room/:roomId" component={Room} />
         <Route path="pre-game" component={PreGame} />
         <Route path="game" component={Game} />
         <Route path="score" component={Score} />

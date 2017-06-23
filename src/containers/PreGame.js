@@ -1,6 +1,16 @@
 import React , { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
-export default class PreGame extends Component {
+import { user } from '../actions'
+
+class PreGame extends Component {
+
+  constructor(props) {
+    super(props)
+
+  }
+
   render() {
     return (
       <div>
@@ -9,3 +19,5 @@ export default class PreGame extends Component {
     );
   }
 }
+
+export default connect()(PreGame)

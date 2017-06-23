@@ -1,9 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-
 import firebase from 'firebase'
 
 // Initialize Firebase
@@ -16,7 +10,5 @@ var config = {
   messagingSenderId: "102756528266"
 }
 
-firebase.initializeApp(config)
-
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const fire = firebase.initializeApp(config)
+export default fire

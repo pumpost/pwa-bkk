@@ -8,11 +8,12 @@ class Game extends Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
       ownerClass: "show",
       joinerClass: "hidden",
-      ownerFire: null,
-      joinerFire: null
+      ownerFire: '',
+      joinerFire: ''
     }
 
     this.userType = 'owner'
@@ -21,28 +22,31 @@ class Game extends Component {
     }
 
     this.toggleHidden = this.toggleHidden.bind(this)
-    this.renderOwnerField  = this.renderOwnerField.bind(this)
-    this.renderJoinerField = this.renderJoinerField.bind(this)
+    this.renderOwnerTurn  = this.renderOwnerTurn.bind(this)
+    this.renderJoinerTurn = this.renderJoinerTurn.bind(this)
     this.fire = this.fire.bind(this)
     this.handleOwnerFire = this.handleOwnerFire.bind(this)
     this.handleJoinerFire = this.handleJoinerFire.bind(this)
 
-    props.roomUpdated(this.props.room.id, (data) => {
-      console.log(data)
+    this.props.roomUpdated(this.props.room.id, (data) => {
+      if ((data && data.ownerFire) ||
+        (data && data.joinerFire)) {
+        this.toggleHidden()
+      }
     })
 
   }
 
   fire(type) {
     if (type === 'owner') {
-      this.turnAction(this.props.room.id, type, this.state.ownerFire)
+      this.props.turnAction(this.props.room.id, type, this.state.ownerFire)
     } else {
-      this.turnAction(this.props.room.id, type, this.state.joinerFire)
+      this.props.turnAction(this.props.room.id, type, this.state.joinerFire)
     }
-    this.state = {
-      ownerFire: null,
-      joinerFire: null
-    }
+    this.setState({
+      ownerFire: '',
+      joinerFire: ''
+    })
   }
 
   handleOwnerFire(e) {
@@ -67,17 +71,17 @@ class Game extends Component {
   }
 
   renderOwnerTurn() {
-    let shotBtn = <button onClick={ () => this.fire('joiner') }>Fire</button>
+    let shotBtn = <button onClick={ () => this.fire('owner') }>Fire</button>
     if (this.userType === 'joiner') shotBtn = ''
     return (
       <div className={this.state.ownerClass}>
-        1 <input type="text" onChange={this.handleOwnerFire} value={this.state.ownerFile} /> {shotBtn}
+        1 <input type="text" onChange={this.handleOwnerFire} value={this.state.ownerFire} /> {shotBtn}
       </div>
     )
   }
 
   renderJoinerTurn() {
-    let shotBtn = <button onClick={ () => this.fire('owner') }>Fire</button>
+    let shotBtn = <button onClick={ () => this.fire('joiner') }>Fire</button>
     if (this.userType === 'owner') shotBtn = ''
     return (
       <div className={this.state.joinerClass}>

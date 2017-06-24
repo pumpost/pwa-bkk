@@ -72,6 +72,7 @@ export function joinRoom(roomId, user, callback=null) {
 
 export function roomUpdated(roomId, callback=null) {
   return dispatch => {
+    firebase.database().ref('rooms/' + roomId).off('value')
     firebase.database().ref('rooms/' + roomId).on('value', function(snapshot) {
       const data = snapshot.val()
       if (callback) callback(data)
@@ -130,7 +131,7 @@ export function setShip(roomId, battlefield, type) {
 
 export function turnAction(roomId, type, num) {
   return dispatch => {
-    const ref = firebase.database().ref('rooms/' + roomId + '/' + type + 'Field')
+    const ref = firebase.database().ref('rooms/' + roomId + '/' + type + 'Fire')
     ref.push(num, () => {
       dispatch({
         type: PUSH_ACTION,

@@ -10,7 +10,7 @@ class PreGame extends Component {
     super(props)
     this.battlefield = Array(25).fill().map(()=> 0)
     this.shipState   = []
-    this.shipLeft    = 4
+    this.shipLeft    = 1
     this.state = {
       shipPosition: ''
     }

@@ -10,6 +10,10 @@ import ButttonStartMenu from '../components/Button/ButtonStartMenu'
 import gress8 from '../images/gress8.png'
 import flag_b from '../images/flag-b.png'
 
+import ship from '../images/ship.png'
+import sword from '../images/sword.png'
+import coin from '../images/coin.png'
+
 class StartGame extends Component {
 
   constructor(props) {
@@ -20,7 +24,7 @@ class StartGame extends Component {
 
   facebookLogin() {
     firebase.auth().signInWithPopup(this.provider).then((result) => {
-      console.log(result)
+      // console.log(result)
       const info = {
         token: result.credential.accessToken,
         displayName: result.user.displayName,
@@ -45,9 +49,9 @@ class StartGame extends Component {
       <div className="home">
         <h1><img src={gress8} alt="pirate" />Pirate of PWA<img src={gress8} alt="pirate" /></h1>
         <h2><img src={flag_b} alt="pirate" /></h2>
-        <ButttonStartMenu btnName="Single Mode" icName="ship" />
-        <ButttonStartMenu btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} />
-        <ButttonStartMenu btnName="Score" icName="coin" />
+        <ButttonStartMenu btnName="Single Mode" icName="ship" imgSrc={ship} />
+        <ButttonStartMenu btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} imgSrc={sword} />
+        <ButttonStartMenu btnName="Score" icName="coin" imgSrc={coin} />
       </div>
     )
   }

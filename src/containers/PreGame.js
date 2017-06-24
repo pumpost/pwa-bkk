@@ -6,6 +6,12 @@ import { room } from '../actions'
 
 import imgPlayer from '../images/player.png'
 
+import b1 from '../images/effect-bomb/b1.png'
+import b2 from '../images/effect-bomb/b3.png'
+import b3 from '../images/effect-bomb/b3.png'
+import b4_horizon from '../images/effect-bomb/b4-horizon.png'
+import b4_vertical from '../images/effect-bomb/b4-vertical.png'
+
 class PreGame extends Component {
 
   constructor(props) {
@@ -95,8 +101,23 @@ class PreGame extends Component {
         <div className="player"><span>23</span></div>
         <div className="player"><span>24</span></div>
         <div className="player"><span>25</span></div>
+
+        <div className="ship-wrap">
+          <div className="b b1"><img src={b1} alt={b1} /></div>
+          <div className="b b2"><img src={b2} alt={b2} /></div>
+          <div className="b b3"><img src={b3} alt={b3} /></div>
+          <div className="b b4"><img src={b4_horizon} alt={b4_horizon} /></div>
+        </div>
+
+        <div className="ship-wrap">
+          <div className="b b1"><img src={b1} alt={b1} /></div>
+          <div className="b b2"><img src={b2} alt={b2} /></div>
+          <div className="b b3"><img src={b3} alt={b3} /></div>
+          <div className="b b4"><img src={b4_vertical} alt={b4_vertical} /></div>
+        </div>
+        
         {/*<input type="text" onChange={this.handleShipPosition} value={this.state.shipPosition} />*/}
-        <button className="btn-start btn-pre btn-rotate">Rotate</button>
+        <button className="btn-start btn-pre btn-rotate" onClick={this.handleRotate}>Rotate</button>
         <button className="btn-start btn-pre btn-back" onClick={this.handleRollback}>Back</button>
         <button className="btn-start btn-pre btn-ok" onClick={this.handleOK}>OK</button>
       </div>

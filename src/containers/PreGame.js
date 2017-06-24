@@ -68,53 +68,62 @@ class PreGame extends Component {
 
   }
 
+  handleClickField(eleLeft, eleTop) {
+    const widthHeight = document.getElementById('slot1').offsetWidth
+    const left = widthHeight * eleLeft
+    const top  = widthHeight * eleTop
+    var d1 = document.getElementById('battle-field');
+    const img = `<img src='${imgPlayer}' style='width: ${widthHeight}px; height: ${widthHeight*2-30}px; position: absolute; top: ${top}px; left: ${left}px;' />`
+    d1.insertAdjacentHTML('beforeend', img);
+  }
+
   render() {
     return (
-      <div className="water-wrap">
+      <div className="water-wrap" id="battle-field">
         <img src={imgPlayer} className="ex-ship" alt="player" />
-        <div className="player"><span>1</span></div>
-        <div className="player"><span>2</span></div>
-        <div className="player"><span>3</span></div>
-        <div className="player"><span>4</span></div>
-        <div className="player"><span>5</span></div>
+        <div className="player" id="slot1" onClick={ () => this.handleClickField(0, 0) }><span>1</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 0) }><span>2</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 0) }><span>3</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 0) }><span>4</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 0) }><span>5</span></div>
         {/*<!-- 6 -->*/}
-        <div className="player"><span>6</span></div>
-        <div className="player"><span>7</span></div>
-        <div className="player"><span>8</span></div>
-        <div className="player"><span>9</span></div>
-        <div className="player"><span>10</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 1) }><span>6</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 1) }><span>7</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 1) }><span>8</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 1) }><span>9</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 1) }><span>10</span></div>
         {/*<!-- 11 -->*/}
-        <div className="player"><span>11</span></div>
-        <div className="player"><span>12</span></div>
-        <div className="player"><span>13</span></div>
-        <div className="player"><span>14</span></div>
-        <div className="player"><span>15</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 2) }><span>11</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 2) }><span>12</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 2) }><span>13</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 2) }><span>14</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 2) }><span>15</span></div>
         {/*<!-- 16 -->*/}
-        <div className="player"><span>16</span></div>
-        <div className="player"><span>17</span></div>
-        <div className="player"><span>18</span></div>
-        <div className="player"><span>19</span></div>
-        <div className="player"><span>20</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 3) }><span>16</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 3) }><span>17</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 3) }><span>18</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 3) }><span>19</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 3) }><span>20</span></div>
         {/*<!--  21-->*/}
-        <div className="player"><span>21</span></div>
-        <div className="player"><span>22</span></div>
-        <div className="player"><span>23</span></div>
-        <div className="player"><span>24</span></div>
-        <div className="player"><span>25</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 3) }><span>21</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 3) }><span>22</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 3) }><span>23</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 3) }><span>24</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 3) }><span>25</span></div>
 
-        <div className="ship-wrap">
-          <div className="b b1"><img src={b1} alt={b1} /></div>
-          <div className="b b2"><img src={b2} alt={b2} /></div>
-          <div className="b b3"><img src={b3} alt={b3} /></div>
-          <div className="b b4"><img src={b4_horizon} alt={b4_horizon} /></div>
-        </div>
+        {/*<div className="ship-wrap">*/}
+          {/*<div className="b b1"><img src={b1} alt={b1} /></div>*/}
+          {/*<div className="b b2"><img src={b2} alt={b2} /></div>*/}
+          {/*<div className="b b3"><img src={b3} alt={b3} /></div>*/}
+          {/*<div className="b b4"><img src={b4_horizon} alt={b4_horizon} /></div>*/}
+        {/*</div>*/}
 
-        <div className="ship-wrap">
-          <div className="b b1"><img src={b1} alt={b1} /></div>
-          <div className="b b2"><img src={b2} alt={b2} /></div>
-          <div className="b b3"><img src={b3} alt={b3} /></div>
-          <div className="b b4"><img src={b4_vertical} alt={b4_vertical} /></div>
-        </div>
+        {/*<div className="ship-wrap">*/}
+          {/*<div className="b b1"><img src={b1} alt={b1} /></div>*/}
+          {/*<div className="b b2"><img src={b2} alt={b2} /></div>*/}
+          {/*<div className="b b3"><img src={b3} alt={b3} /></div>*/}
+          {/*<div className="b b4"><img src={b4_vertical} alt={b4_vertical} /></div>*/}
+        {/*</div>*/}
         
         {/*<input type="text" onChange={this.handleShipPosition} value={this.state.shipPosition} />*/}
         <button className="btn-start btn-pre btn-rotate" onClick={this.handleRotate}>Rotate</button>

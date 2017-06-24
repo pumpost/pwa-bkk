@@ -6,12 +6,6 @@ import { room } from '../actions'
 
 import imgPlayer from '../images/player.png'
 
-import b1 from '../images/effect-bomb/b1.png'
-import b2 from '../images/effect-bomb/b3.png'
-import b3 from '../images/effect-bomb/b3.png'
-import b4_horizon from '../images/effect-bomb/b4-horizon.png'
-import b4_vertical from '../images/effect-bomb/b4-vertical.png'
-
 class PreGame extends Component {
 
   constructor(props) {
@@ -38,20 +32,15 @@ class PreGame extends Component {
   }
 
   handleOK() {
-    this.setState({
-      shipPosition: ''
-    })
-    const position = this.state.shipPosition.split(",")
-    const shipNum  = this.shipLeft
-    position.forEach((num) => {
-      this.battlefield[num] = shipNum
-    })
-    this.shipState.push(position)
+    if (this.shipLeft > 0) return
 
-    this.shipLeft--
-    if (this.shipLeft <= 0) {
-      this.props.setShip(this.props.room.id, this.battlefield, this.fieldType)
-    }
+    this.shipState.forEach((ele, index) => {
+      ele.forEach((num) => {
+        this.battlefield[num] = index
+      })
+    })
+
+    this.props.setShip(this.props.room.id, this.battlefield, this.fieldType)
   }
 
   handleRollback() {

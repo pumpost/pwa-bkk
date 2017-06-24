@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Pirate",
+  "name": "Pirate of PWA",
   "icons": [{
     "src": "icon-128x128.png",
     "sizes": "128x128",

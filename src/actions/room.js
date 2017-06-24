@@ -6,6 +6,9 @@ export const LEAVE_ROOM   = 'LEAVE_ROOM'
 export const FETCH_ROOMS  = 'FETCH_ROOMS'
 export const SET_SHIP     = 'SET_SHIP'
 export const PUSH_ACTION  = 'PUSH_ACTION'
+export const FIRE_UPDATED = 'FIRE_UPDATED'
+export const END_GAME     = 'END_GAME'
+export const SET_WINNER   = 'SET_WINNER'
 
 export function createRoom(room, callback=null) {
   return dispatch => {
@@ -49,7 +52,8 @@ export function joinRoom(roomId, user, callback=null) {
         currentData.joiner = {
           displayName: user.displayName,
           photoURL: user.photoURL,
-          uid: user.uid
+          uid: user.uid,
+          hp: 8
         }
         return currentData
       } else {
@@ -131,12 +135,51 @@ export function setShip(roomId, battlefield, type) {
   }
 }
 
+export function fireUpdated(roomId, callback='') {
+  return dispatch => {
+    const namespace = 'rooms/' + roomId + '/fire'
+    firebase.database().ref(namespace).off('child_added')
+    firebase.database().ref(namespace).on('child_added', function(snapshot) {
+      const data = snapshot.val()
+      if (callback) callback(data)
+      dispatch({
+        type: FIRE_UPDATED
+      })
+    })
+  }
+}
+
 export function turnAction(roomId, type, num) {
   return dispatch => {
-    const ref = firebase.database().ref('rooms/' + roomId + '/' + type + 'Fire')
-    ref.push(num, () => {
+    const ref = firebase.database().ref('rooms/' + roomId)
+    ref.child('fire').push().set({[type]: num}, () => {
       dispatch({
-        type: PUSH_ACTION,
+        type: PUSH_ACTION
+      })
+    })
+  }
+}
+
+export function onEndGame(roomId, callback=null) {
+  return dispatch => {
+    const namespace = 'rooms/' + roomId + '/winner'
+    firebase.database().ref(namespace).off('value')
+    firebase.database().ref(namespace).on('value', function(snapshot) {
+      const data = snapshot.val()
+      if (callback) callback(data)
+      dispatch({
+        type: END_GAME,
+      })
+    })
+  }
+}
+
+export function setWinner(roomId, type) {
+  return dispatch => {
+    const ref = firebase.database().ref('rooms/' + roomId + '/winner')
+    ref.set(type, () => {
+      dispatch({
+        type: SET_WINNER
       })
     })
   }

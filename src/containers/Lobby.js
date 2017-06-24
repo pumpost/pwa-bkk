@@ -1,53 +1,64 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
-import { user, room } from '../actions'
+import { room } from '../actions'
 
 class Lobby extends Component {
 
   componentWillMount() {
-    this.props.fetchPlayers()
+    this.props.fetchRooms()
+
     this.createRoom = this.createRoom.bind(this)
+    this.joinRoom = this.joinRoom.bind(this)
   }
 
   createRoom() {
-    const roomId = this.guid()
     const roomInfo = {
-      roomId,
-      roomName: this.props.user.displayName,
-      owner: this.props.user,
+      id: this.props.user.uid,
+      owner: {
+        displayName: this.props.user.displayName,
+        photoURL: this.props.user.photoURL,
+        uid: this.props.user.uid
+      },
       joiner: null,
       ready: 0
     }
-    this.prop.createRoom(roomInfo, () => {
-      browserHistory.push('/room/' + roomId)
+
+    this.props.createRoom(roomInfo, () => {
+      browserHistory.push('/room/' + roomInfo.id)
     })
   }
 
-  guid() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
+  joinRoom(roomId) {
+    this.props.joinRoom(roomId, this.props.user, (status) => {
+      if (status) {
+        browserHistory.push('/room/' + roomId)
+      } else {
+        console.log('fail.')
+      }
+    })
+  }
+
+  renderRoomList() {
+    if (this.props.rooms) {
+      return Object.keys(this.props.rooms).map(key => {
+        return (
+          <div key={key}>
+            <a onClick={() => {this.joinRoom(key)}}>{ this.props.rooms[key].owner.displayName }</a>
+          </div>
+        )
+      })
+    } else {
+      return ''
     }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
   }
 
   render() {
     return (
       <div>
         <button onClick={this.createRoom}>Create Room</button>
-        {
-          Object.keys(this.props.players).map(key => {
-            return (
-              <div key={key}>
-                <Link to={`/room/${key}`}>{ this.props.players[key].displayName }</Link>
-              </div>
-            )
-          })
-        }
+        { this.renderRoomList() }
       </div>
     );
   }
@@ -56,8 +67,12 @@ class Lobby extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user.user,
-    players: state.user.players
+    rooms: state.room.list
   }
 }
 
-export default connect(mapStateToProps, {fetchPlayers: user.fetchPlayers, createRoom: room.createRoom})(Lobby)
+export default connect(mapStateToProps, {
+  fetchRooms: room.fetchRooms,
+  createRoom: room.createRoom,
+  joinRoom: room.joinRoom
+})(Lobby)

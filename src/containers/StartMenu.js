@@ -7,6 +7,9 @@ import { user } from '../actions'
 // import StartMenuLayout from '../components/Layout/StartMenuLayout'
 import ButttonStartMenu from '../components/Button/ButtonStartMenu'
 
+import gress8 from '../images/gress8.png'
+import flag_b from '../images/flag-b.png'
+
 class StartGame extends Component {
 
   constructor(props) {
@@ -40,8 +43,8 @@ class StartGame extends Component {
   render() {
     return (
       <div className="home">
-        <h1><img src="images/gress8.png" alt="pirate" />Pirate of PWA<img src="images/gress8.png" alt="pirate" /></h1>
-        <h2><img src="images/flag-b.png" alt="pirate" /></h2>
+        <h1><img src={gress8} alt="pirate" />Pirate of PWA<img src={gress8} alt="pirate" /></h1>
+        <h2><img src={flag_b} alt="pirate" /></h2>
         <ButttonStartMenu btnName="Single Mode" icName="ship" />
         <ButttonStartMenu btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} />
         <ButttonStartMenu btnName="Score" icName="coin" />

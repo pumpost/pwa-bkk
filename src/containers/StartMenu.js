@@ -40,8 +40,8 @@ class StartGame extends Component {
   render() {
     return (
       <div className="home">
-        <h1><img src="images/gress8.png" />Pirate of PWA<img src="images/gress8.png" /></h1>
-        <h2><img src="images/flag-b.png" /></h2>
+        <h1><img src="images/gress8.png" alt="pirate" />Pirate of PWA<img src="images/gress8.png" alt="pirate" /></h1>
+        <h2><img src="images/flag-b.png" alt="pirate" /></h2>
         <ButttonStartMenu btnName="Single Mode" icName="ship" />
         <ButttonStartMenu btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} />
         <ButttonStartMenu btnName="Score" icName="coin" />

@@ -11,6 +11,8 @@ export function createRoom(room, callback=null) {
   return dispatch => {
     const ref = firebase.database().ref('rooms/' + room.id)
 
+    ref.onDisconnect().remove()
+
     ref.set(room, () => {
       if (callback) callback()
       dispatch({

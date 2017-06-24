@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
 import { room } from '../actions'
+import flag2 from '../images/flag2.png'
+import imgplayer from '../images/player.png'
+import enemy from '../images/enemy.png'
 
 class Room extends Component {
 
@@ -18,15 +21,16 @@ class Room extends Component {
   renderReadyBtn(roomId, type, ready) {
     if (ready) return ''
 
-    return <button onClick={() => this.props.setReady(roomId, type, ready)}>Ready</button>
+    return <button className="btn-start" onClick={() => this.props.setReady(roomId, type, ready)}>Ready</button>
   }
 
   renderOwner() {
     if (!this.props.room.owner) return ''
     const owner = this.props.room.owner
     return (
-      <div>
-        {owner.displayName}
+      <div className="room-ship-player p1">
+        <img src={imgplayer} alt="player" />
+        <p>{owner.displayName}</p>
         {this.renderReadyBtn(this.props.room.id, 'owner', owner.ready)}
       </div>
     )
@@ -36,8 +40,9 @@ class Room extends Component {
     if (!this.props.room.joiner) return ''
     const joiner = this.props.room.joiner
     return (
-      <div>
-        {joiner.displayName}
+      <div className="room-ship-player p2">
+        <img src={enemy} alt="enemy" />
+        <p>{joiner.displayName}</p>
         {this.renderReadyBtn(this.props.room.id, 'joiner', joiner.ready)}
       </div>
     )
@@ -45,14 +50,26 @@ class Room extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="home">
+        <h1 className="room-title"><img src={flag2} alt="flag" /> Room <img src={flag2} alt="flag" /></h1>
+        <h2 className="room-title">
+          <span className="w w1">w</span>
+          <span className="w w2">a</span>
+          <span className="w w3">i</span>
+          <span className="w w4">t</span>
+          <span className="w w5">i</span>
+          <span className="w w6">n</span>
+          <span className="w w7">g</span>
+          <span className="w w8">.</span>
+          <span className="w w9">.</span>
+        </h2>
+
+        <div className="room-ship">
           { this.renderOwner() }
-        </div>
-        <div>VS</div>
-        <div>
+          <p className="vs"><span>--</span> VS <span>--</span></p>
           { this.renderJoiner() }
         </div>
+
       </div>
     )
   }

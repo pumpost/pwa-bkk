@@ -28,11 +28,21 @@ class Game extends Component {
     this.handleOwnerFire = this.handleOwnerFire.bind(this)
     this.handleJoinerFire = this.handleJoinerFire.bind(this)
 
+    this.props.onEndGame(this.props.room.id, (data) => {
+      if (data.owner) {
+        console.log(this.props.room.joinerField)
+      } else if (data.joiner) {
+        console.log(this.props.room.ownerField)
+      }
+
+      this.toggleHidden()
+    })
+
     this.props.fireUpdated(this.props.room.id, (data) => {
       if (data.owner) {
-
+        console.log(this.props.room.joinerField)
       } else if (data.joiner) {
-
+        console.log(this.props.room.ownerField)
       }
 
       this.toggleHidden()
@@ -115,5 +125,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   turnAction: room.turnAction,
-  fireUpdated: room.fireUpdated
+  fireUpdated: room.fireUpdated,
+  onEndGame: room.onEndGame,
+  setWinner: room.setWinner
 })(Game)

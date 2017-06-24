@@ -22,10 +22,12 @@ class Lobby extends Component {
       owner: {
         displayName: this.props.user.displayName,
         photoURL: this.props.user.photoURL,
-        uid: this.props.user.uid
+        uid: this.props.user.uid,
+        hp: 8
       },
       joiner: null,
-      ready: 0
+      ready: 0,
+      winner: null
     }
 
     this.props.createRoom(roomInfo, () => {

@@ -4,6 +4,8 @@ import firebase from 'firebase'
 import { browserHistory } from 'react-router'
 
 import { user } from '../actions'
+// import StartMenuLayout from '../components/Layout/StartMenuLayout'
+import ButttonStartMenu from '../components/Button/ButtonStartMenu'
 
 class StartGame extends Component {
 
@@ -37,8 +39,12 @@ class StartGame extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.facebookLogin}>Login</button>
+      <div className="home">
+        <h1><img src="images/gress8.png" />Pirate of PWA<img src="images/gress8.png" /></h1>
+        <h2><img src="images/flag-b.png" /></h2>
+        <ButttonStartMenu btnName="Single Mode" icName="ship" />
+        <ButttonStartMenu btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} />
+        <ButttonStartMenu btnName="Score" icName="coin" />
       </div>
     )
   }

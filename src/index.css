@@ -1,8 +1,19 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'VT323', 'Athiti', 'Open Sans', sans-serif;
   font-size: 20px;
+}
+
+button {
+  border: 0;
+  font-family: 'VT323', 'Athiti', 'Open Sans', sans-serif;
 }
 
 .hidden {
@@ -11,12 +22,6 @@ body {
 
 .show{
   display:block;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
 }
 
 .bg {
@@ -519,6 +524,43 @@ body {
   transform: rotate(10deg);
 }
 
+
+/*/ add new /*/
+.btn-gress {
+  background: url(images/gress4.png) 0 0 repeat;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #ffeb3b;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.btn-gress.btn-createroom {
+  border: 0;
+  border-bottom: 3px solid #795548;
+  margin-top: 20px;
+}
+
+.btn-gress.btn-back {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  left: 0;
+  padding: 5px 15px;
+  /* border: 3px solid rgba(120, 86, 72, 0.72); */
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  color: #795548;
+  margin-top: 3%;
+  margin-left: 3%;
+
+}
+
+.btn-wrap {
+  margin-top: 15px;
+}
+
+
 @media only screen  and (min-width : 992px) {
 
   .water-wrap {
@@ -565,11 +607,13 @@ body {
     padding-bottom: 0;
     padding-top: 40px;
     height: 1000px;
+    padding-top: 50%;
   }
 
   .lobby ul {
-    height: 50%;
-    width: 800px
+    width: 800px;
+    height: 34%;
+    top: 35%;
   }
 
   .searchroom {

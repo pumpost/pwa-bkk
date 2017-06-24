@@ -4,6 +4,9 @@ import { browserHistory } from 'react-router'
 
 import { room } from '../actions'
 
+import rock_g from '../images/rock-g.png'
+import rock_g2 from '../images/rock-g2.png'
+
 class Lobby extends Component {
 
   componentWillMount() {
@@ -44,9 +47,9 @@ class Lobby extends Component {
     if (this.props.rooms) {
       return Object.keys(this.props.rooms).map(key => {
         return (
-          <div key={key}>
+          <li key={key}>
             <a onClick={() => {this.joinRoom(key)}}>{ this.props.rooms[key].owner.displayName }</a>
-          </div>
+          </li>
         )
       })
     } else {
@@ -56,9 +59,21 @@ class Lobby extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.createRoom}>Create Room</button>
-        { this.renderRoomList() }
+      <div className="home lobby-wrap">
+
+          <div className="btn-wrap">
+            <div className="btn-gress btn-back">Back</div>
+          </div>
+          <button onClick={this.createRoom} className="btn-gress btn-createroom">Create Room</button>
+          <h1><img src={rock_g} alt="" />Lobby<img src={rock_g2} /></h1>
+
+          <input type="text" placeholder="Search" className="searchroom" />
+          <div className="lobby">
+            <ul>
+              { this.renderRoomList() }
+            </ul>
+          </div>
+       
       </div>
     );
   }

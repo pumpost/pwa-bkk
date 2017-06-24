@@ -51,6 +51,15 @@ button {
   width: 100%;
 }
 
+.water-wrap:before, .water-wrap:after {
+  content: "";
+  width: 100%;
+  display: block;
+  height: 128px;
+  position: absolute;
+  z-index: 1;
+}
+
 .water-wrap:before {
   background: url(images/gress-top.png) 0 0 repeat-x;
   top: -110px;
@@ -61,14 +70,7 @@ button {
   bottom: -110px;
 }
 
-.water-wrap:before, .water-wrap:after {
-  content: "";
-  width: 100%;
-  display: block;
-  height: 128px;
-  position: absolute;
-  z-index: 1;
-}
+
 .player {
   width: calc(100% / 5);
   float: left;
@@ -360,7 +362,7 @@ button {
   height: 41%;
   overflow: hidden;
   transform: translate(-50%, 0);
-  top: 30%;
+  top: 38%;
   left: 50%;
   padding-left:20px;
 }
@@ -560,6 +562,9 @@ button {
   margin-top: 15px;
 }
 
+.home.lobby-wrap h1{
+  margin-top: 15px;
+}
 
 @media only screen  and (min-width : 992px) {
 

@@ -47,6 +47,7 @@ class Room extends Component {
     return (
       <div>
         <div>
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
           { this.renderOwner() }
         </div>
         <div>VS</div>

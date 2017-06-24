@@ -28,11 +28,14 @@ class Game extends Component {
     this.handleOwnerFire = this.handleOwnerFire.bind(this)
     this.handleJoinerFire = this.handleJoinerFire.bind(this)
 
-    this.props.roomUpdated(this.props.room.id, (data) => {
-      if ((data && data.ownerFire) ||
-        (data && data.joinerFire)) {
-        this.toggleHidden()
+    this.props.fireUpdated(this.props.room.id, (data) => {
+      if (data.owner) {
+
+      } else if (data.joiner) {
+
       }
+
+      this.toggleHidden()
     })
 
   }
@@ -93,6 +96,8 @@ class Game extends Component {
   render() {
     return (
       <div>
+        <br />
+        <br /><br /><br /><br /><br /><br /><br /><br />
         Game
         {this.renderOwnerTurn()}
         {this.renderJoinerTurn()}
@@ -110,5 +115,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   turnAction: room.turnAction,
-  roomUpdated: room.roomUpdated
+  fireUpdated: room.fireUpdated
 })(Game)

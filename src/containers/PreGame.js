@@ -63,6 +63,7 @@ class PreGame extends Component {
   render() {
     return (
       <div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <input type="text" onChange={this.handleShipPosition} value={this.state.shipPosition} />
         <button onClick={this.handleRollback}>back</button>
         <button onClick={this.handleOK}>OK</button>

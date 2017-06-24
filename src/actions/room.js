@@ -112,3 +112,11 @@ export function setReady(roomId, type) {
     })
   }
 }
+
+export function setShip() {
+
+}
+
+export function setPlay() {
+
+}

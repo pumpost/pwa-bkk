@@ -19,7 +19,7 @@ export function signin(info, callback=null) {
       status: 'online',
       uid: info.uid
     }, () => {
-      callback()
+      if (callback) callback()
       dispatch({
         type: SIGNIN,
         payload: { data: info }

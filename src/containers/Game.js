@@ -21,16 +21,14 @@ class Game extends Component {
     this.state = {
       ownerClass: "show",
       joinerClass: "hidden",
-      ownerFire: '',
-      joinerFire: ''
+      firePosition: ''
     }
 
     this.toggleHidden = this.toggleHidden.bind(this)
     this.renderOwnerTurn  = this.renderOwnerTurn.bind(this)
     this.renderJoinerTurn = this.renderJoinerTurn.bind(this)
     this.fire = this.fire.bind(this)
-    this.handleOwnerFire = this.handleOwnerFire.bind(this)
-    this.handleJoinerFire = this.handleJoinerFire.bind(this)
+    this.handleSelectTarget = this.handleSelectTarget.bind(this)
 
     if (this.props.room.id !== this.props.user.uid) {
       this.userType   = 'joiner'
@@ -75,30 +73,23 @@ class Game extends Component {
     }
 
     e.currentTarget.style.border = '2px solid red'
-    console.log(position)
+    this.setState({
+      firePosition: position
+    })
   }
 
   fire(type) {
+    console.log(this.state.firePosition)
+    if (this.firePosition === '') return
+
     if (type === 'owner') {
-      this.props.turnAction(this.props.room.id, type, this.state.ownerFire)
+      this.props.turnAction(this.props.room.id, type, this.state.firePosition)
     } else {
-      this.props.turnAction(this.props.room.id, type, this.state.joinerFire)
+      this.props.turnAction(this.props.room.id, type, this.state.firePosition)
     }
-    this.setState({
-      ownerFire: '',
-      joinerFire: ''
-    })
-  }
 
-  handleOwnerFire(e) {
     this.setState({
-      ownerFire: e.target.value
-    })
-  }
-
-  handleJoinerFire(e) {
-    this.setState({
-      joinerFire: e.target.value
+      firePosition: ''
     })
   }
 

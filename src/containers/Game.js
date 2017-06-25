@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
-// import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
 import { room } from '../actions'
 import GameGridLayout from '../components/GameGridLayout'
@@ -45,7 +45,11 @@ class Game extends Component {
 
     this.props.onEndGame(this.props.room.id, (data) => {
       if (!data) return
-      console.log(data)
+      let winner = this.props.room.owner.displayName
+      if (data != 'owner') {
+        winner = this.props.room.joiner.displayName
+      }
+      alert('Winer is ' + winner + '!')
     })
 
     this.props.fireUpdated(this.props.room.id, (data) => {

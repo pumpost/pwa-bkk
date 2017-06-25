@@ -14,7 +14,7 @@ class Congrats extends Component {
                   <img src={star} alt={star} />
             </div>
             <h3>Congratulation</h3>
-            <p className="winner">sdfksdf;dskfl;skd;</p>
+            {/*<p className="winner">sdfksdf;dskfl;skd;</p>*/}
           </div>
         </div>
       </div>

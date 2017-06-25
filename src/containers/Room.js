@@ -31,7 +31,7 @@ class Room extends Component {
     }
 
     var n = new Notification(joiner.displayName + ' has been joined!!', options);
-    setTimeout(n.close.bind(n), 3000);
+    setTimeout(n.close.bind(n), 5000);
   }
 
   renderReadyBtn(roomId, type, ready) {

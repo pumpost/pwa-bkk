@@ -25,9 +25,15 @@ class Game extends Component {
       joinerFire: ''
     }
 
-    // this.userType = 'owner'
-    // if (this.props.room.id !== this.props.user.uid) {
-    //   this.userType = 'joiner'
+    this.userType = 'owner'
+    if (this.props.room.id !== this.props.user.uid) {
+      this.userType = 'joiner'
+    }
+
+    // if () {
+    //
+    // } else {
+    //
     // }
 
     this.toggleHidden = this.toggleHidden.bind(this)

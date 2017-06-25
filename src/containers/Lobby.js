@@ -10,6 +10,11 @@ import rock_g2 from '../images/rock-g2.png'
 class Lobby extends Component {
 
   componentWillMount() {
+    if (!this.props.user.uid) {
+      browserHistory.push('/')
+      return
+    }
+
     this.props.fetchRooms()
 
     this.createRoom = this.createRoom.bind(this)

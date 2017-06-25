@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import Layout from './components/Layout'
 import LayoutGame from './components/LayoutGame'
+import LayoutCongrats from './components/LayoutCongrats'
 
 import StartMenu from './containers/StartMenu'
 import Lobby from './containers/Lobby'
@@ -11,6 +12,7 @@ import PreGame from './containers/PreGame'
 import Game from './containers/Game'
 import Score from './containers/Score'
 import ScoreBoard from './containers/ScoreBoard'
+import Congrats from './containers/Congrats'
 
 
 export default () => {
@@ -29,6 +31,9 @@ export default () => {
       <Route path="/" components={LayoutGame}>
         <Route path="pre-game" component={PreGame} />
         <Route path="game" component={Game} />
+      </Route>
+      <Route path="/" components={LayoutCongrats}>
+        <Route path="congrats" component={Congrats} />
       </Route>
     </Router>
   )

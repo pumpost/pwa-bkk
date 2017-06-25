@@ -358,6 +358,11 @@ button {
   float: left;
 }
 
+.btn-back.no , .btn-ok.no {
+  background: #bbae91;
+  color: #fae8c2;
+}
+
 .lobby {
   width: 90%;
   margin: 0 auto;
@@ -434,19 +439,33 @@ button {
   opacity: 0.5;
 }
 
-.ex-ship {
-  position: absolute;
-  width: 70px;
-  z-index: 10;
-  transform: translate(-50%, -90%) rotate(0);
-  left: 50%;
-  top: 0;
-  transition: all 0.5s;
+/*.ex-ship {*/
+  /*position: absolute;*/
+  /*width: 70px;*/
+  /*z-index: 10;*/
+  /*transform: translate(-50%, -90%) rotate(0);*/
+  /*left: 50%;*/
+  /*top: 0;*/
+  /*transition: all 0.5s;*/
+/*}*/
+
+/*.ex-ship.rotate {*/
+  /*transition: all 0.5s;*/
+  /*transform: translate(-50%, -90%) rotate(90deg);*/
+/*}*/
+
+.player-info.pre-game {
+  font-size: 55px;
+  top: -70px;
 }
 
-.ex-ship.rotate {
-  transition: all 0.5s;
-  transform: translate(-50%, -90%) rotate(90deg);
+.player-info.pre-game img {
+  width: 25px;
+}
+
+.ex-ship {
+  width: 30px;
+  margin-top: -15px;
 }
 
 .player-info {

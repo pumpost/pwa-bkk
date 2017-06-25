@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router'
 import { room } from '../actions'
 
 import imgPlayer from '../images/player.png'
+import imgEnemy from '../images/enemy.png'
 
 class PreGame extends Component {
 
@@ -18,7 +19,9 @@ class PreGame extends Component {
 
     this.battlefield = Array(25).fill().map(()=> 0)
     this.shipState   = []
-    this.shipLeft    = 4
+    this.state = {
+      shipLeft: 4
+    }
 
     this.handleOK = this.handleOK.bind(this)
     this.handleRollback = this.handleRollback.bind(this)
@@ -26,6 +29,7 @@ class PreGame extends Component {
     this.userType = 'owner'
     if (this.props.room.id !== this.props.user.uid) {
       this.userType = 'joiner'
+      console.log("====> jo", this.userType)
     }
 
     this.fieldType = this.userType + 'Field'
@@ -35,10 +39,21 @@ class PreGame extends Component {
         browserHistory.push('/game')
       }
     })
+
+    this.imgUser = '';
+
+    if(this.userType === 'owner') {
+      this.imgUser = imgPlayer
+    } else {
+      this.imgUser = imgEnemy
+    }
+
+    console.log("userImg====>", this.imgUser)
   }
 
   handleOK() {
-    if (this.shipLeft > 0) return
+    if (this.state.shipLeft > 0) return
+
 
     this.shipState.forEach((ele, index) => {
       ele.forEach((num) => {
@@ -50,16 +65,28 @@ class PreGame extends Component {
   }
 
   handleRollback() {
-    if (this.shipLeft >= 4) return
-    this.shipLeft++
-    var elem = document.getElementById("ship-" + this.shipLeft)
+    if (this.state.shipLeft >= 4) return
+
+
+    // this.shipLeft++
+    const shipLeft = this.state.shipLeft + 1
+    this.setState({ shipLeft: shipLeft })
+    var elem = document.getElementById("ship-" + shipLeft)
     elem.remove()
     this.shipState.pop()
     console.log(this.shipState)
   }
 
+  handleHideBtn() {
+    if(this.state.shipLeft < 1) {
+      return <button className="btn-start btn-pre btn-ok" onClick={this.handleOK}>Ok</button>
+    } else {
+      return <button className="btn-start btn-pre btn-ok no" onClick={this.handleOK}>Wait..</button>
+    }
+  }
+
   handleClickField(eleLeft, eleTop, fields) {
-    if (this.shipLeft <= 0) return
+    if (this.state.shipLeft <= 0) return
 
     let found = false
     this.shipState.forEach(arr => {
@@ -76,18 +103,22 @@ class PreGame extends Component {
     const left = widthHeight * eleLeft
     const top  = widthHeight * eleTop
     var d1 = document.getElementById('battle-field')
-    const img = `<img src='${imgPlayer}' id="ship-${this.shipLeft}" style='width: ${widthHeight}px; height: ${widthHeight*2-30}px; position: absolute; top: ${top}px; left: ${left}px; z-index: 1;' />`
+    const img = `<img src='${this.imgUser}' id="ship-${this.state.shipLeft}" style='width: ${widthHeight}px; height: ${widthHeight*2-30}px; position: absolute; top: ${top}px; left: ${left}px; z-index: 1;' />`
     d1.insertAdjacentHTML('beforeend', img)
 
     this.shipState.push(fields)
 
-    this.shipLeft--
+    this.setState({ shipLeft: this.state.shipLeft - 1 })
   }
 
   render() {
+    console.log("======", this.imgUser)
+    console.log("render userType =", this.userType)
     return (
       <div className="water-wrap" id="battle-field">
-        <img src={imgPlayer} className="ex-ship" alt="player" />
+        <div className="player-info pre-game">
+           <img src={this.imgUser} className="ex-ship" alt="player" /> x {this.state.shipLeft}
+        </div>
         <div className="player" id="slot1" onClick={ () => this.handleClickField(0, 0, [1,6]) }><span>1</span></div>
         <div className="player" onClick={ () => this.handleClickField(1, 0, [2,7]) }><span>2</span></div>
         <div className="player" onClick={ () => this.handleClickField(2, 0, [3,8]) }><span>3</span></div>
@@ -134,8 +165,11 @@ class PreGame extends Component {
         
         {/*<input type="text" onChange={this.handleShipPosition} value={this.state.shipPosition} />*/}
         {/*<button className="btn-start btn-pre btn-rotate" onClick={this.handleRotate}>Rotate</button>*/}
+        {/*<button className="btn-start btn-pre btn-back" onClick={this.handleRollback}>Back</button>*/}
+
         <button className="btn-start btn-pre btn-back" onClick={this.handleRollback}>Back</button>
-        <button className="btn-start btn-pre btn-ok" onClick={this.handleOK}>OK</button>
+        { this.handleHideBtn() }
+
       </div>
     )
   }

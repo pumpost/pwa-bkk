@@ -311,7 +311,7 @@ button {
 }
 
 .btn-back {
-  left: calc(100% /3);
+  /*left: calc(100% /3);*/
 }
 
 .btn-ok {

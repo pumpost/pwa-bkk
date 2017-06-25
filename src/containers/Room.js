@@ -45,6 +45,7 @@ class Room extends Component {
   renderOwner() {
     if (!this.props.room || !this.props.room.owner) return ''
     const owner = this.props.room.owner
+
     return (
       <div className="room-ship-player p1">
         <img src={imgplayer} alt="player" />

@@ -9,6 +9,7 @@ body {
   padding: 0;
   font-family: 'VT323', 'Athiti', 'Open Sans', sans-serif;
   font-size: 20px;
+  overflow-x: hidden;
 }
 
 button {
@@ -42,6 +43,10 @@ button {
   vertical-align: middle;
   display: inline-block;
   margin-right: 10px;
+}
+
+.i-ship {
+  width: 30px;
 }
 
 .water-wrap {
@@ -289,6 +294,7 @@ button {
   margin: 5% auto;
   cursor: pointer;
   transition: all 0.8s;
+  text-decoration: none;
 }
 
 .btn-start:hover {
@@ -389,6 +395,7 @@ button {
   transform: translate(-50%, 0);
   top: 8%;
   left: 50%;
+  overflow-y: auto;
 }
 
 .lobby ul li {
@@ -572,6 +579,7 @@ button {
   color: #ffeb3b;
   font-size: 30px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-gress.btn-createroom {
@@ -645,7 +653,7 @@ button {
 
 .scoreboard ul li {
   padding: 5px 0 5px 30px;
-  background: url(images/sword.png) left center no-repeat;
+  background: url(images/sword.png) left 10px no-repeat;
   background-size: 20px;
   border-bottom: 1px solid #fff8dd;
   position: relative;
@@ -724,7 +732,6 @@ button {
   }
 
   .lobby ul {
-    width: 800px;
     height: 34%;
     top: 15%;
   }

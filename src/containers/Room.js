@@ -12,6 +12,7 @@ class Room extends Component {
   constructor(props) {
     super(props)
     props.roomUpdated(this.props.params.roomId, (data) => {
+      console.log(data)
       if (data.ready === 2) {
         browserHistory.push('/pre-game')
       }

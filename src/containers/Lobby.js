@@ -72,7 +72,7 @@ class Lobby extends Component {
             <div className="btn-gress btn-back">Back</div>
           </div>
           <button onClick={this.createRoom} className="btn-gress btn-createroom">Create Room</button>
-          <h1><img src={rock_g} alt="" />Lobby<img src={rock_g2} /></h1>
+          <h1><img src={rock_g} alt={rock_g} />Lobby<img src={rock_g2} alt={rock_g} /></h1>
 
           <input type="text" placeholder="Search" className="searchroom" />
           <div className="lobby">

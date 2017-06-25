@@ -74,7 +74,6 @@ class PreGame extends Component {
     var elem = document.getElementById("ship-" + shipLeft)
     elem.remove()
     this.shipState.pop()
-    console.log(this.shipState)
   }
 
   handleHideBtn() {
@@ -91,7 +90,7 @@ class PreGame extends Component {
     let found = false
     this.shipState.forEach(arr => {
       fields.forEach(num => {
-        if (arr.indexOf(num + 1) !== -1) {
+        if (arr.indexOf(num) !== -1) {
           found = true
         }
       })
@@ -122,7 +121,7 @@ class PreGame extends Component {
         <div className="player" id="slot1" onClick={ () => this.handleClickField(0, 0, [1,6]) }><span>1</span></div>
         <div className="player" onClick={ () => this.handleClickField(1, 0, [2,7]) }><span>2</span></div>
         <div className="player" onClick={ () => this.handleClickField(2, 0, [3,8]) }><span>3</span></div>
-        <div className="player" onClick={ () => this.handleClickField(3, 0, [4,8]) }><span>4</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 0, [4,9]) }><span>4</span></div>
         <div className="player" onClick={ () => this.handleClickField(4, 0, [5,10]) }><span>5</span></div>
         {/*<!-- 6 -->*/}
         <div className="player" onClick={ () => this.handleClickField(0, 1, [6,11]) }><span>6</span></div>

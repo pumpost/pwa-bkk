@@ -20,7 +20,8 @@ class PreGame extends Component {
     this.battlefield = Array(25).fill().map(()=> 0)
     this.shipState   = []
     this.state = {
-      shipLeft: 4
+      shipLeft: 4,
+      readyToGo: false
     }
 
     this.handleOK = this.handleOK.bind(this)
@@ -54,6 +55,9 @@ class PreGame extends Component {
   handleOK() {
     if (this.state.shipLeft > 0) return
 
+    this.setState({
+      readyToGo: true
+    })
 
     this.shipState.forEach((ele, index) => {
       ele.forEach((num) => {
@@ -77,7 +81,7 @@ class PreGame extends Component {
   }
 
   handleHideBtn() {
-    if(this.state.shipLeft < 1) {
+    if(this.state.readyToGo) {
       return <button className="btn-start btn-pre btn-ok no" onClick={this.handleOK}>Wait..</button>
     } else {
       return <button className="btn-start btn-pre btn-ok " onClick={this.handleOK}>Ok</button>

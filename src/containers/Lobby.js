@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { room } from '../actions'
 
@@ -70,7 +70,7 @@ class Lobby extends Component {
       <div className="home lobby-wrap">
 
           <div className="btn-wrap">
-            <div className="btn-gress btn-back">Back</div>
+            <Link to="/" className="btn-gress btn-back">Back</Link>
           </div>
           <button onClick={this.createRoom} className="btn-gress btn-createroom">Create Room</button>
           <h1><img src={rock_g} alt={rock_g} />Lobby<img src={rock_g2} alt={rock_g} /></h1>

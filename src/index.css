@@ -9,6 +9,7 @@ body {
   padding: 0;
   font-family: 'VT323', 'Athiti', 'Open Sans', sans-serif;
   font-size: 20px;
+  overflow-x: hidden;
 }
 
 button {
@@ -42,6 +43,10 @@ button {
   vertical-align: middle;
   display: inline-block;
   margin-right: 10px;
+}
+
+.i-ship {
+  width: 30px;
 }
 
 .water-wrap {
@@ -289,6 +294,7 @@ button {
   margin: 5% auto;
   cursor: pointer;
   transition: all 0.8s;
+  text-decoration: none;
 }
 
 .btn-start:hover {
@@ -372,6 +378,7 @@ button {
   padding-bottom: 100%;
   padding-top: 39%;
   overflow: hidden;
+  position: relative;
 }
 
 .lobby ul {
@@ -386,8 +393,9 @@ button {
   height: 41%;
   overflow: hidden;
   transform: translate(-50%, 0);
-  top: 38%;
+  top: 8%;
   left: 50%;
+  overflow-y: auto;
 }
 
 .lobby ul li {
@@ -571,6 +579,7 @@ button {
   color: #ffeb3b;
   font-size: 30px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-gress.btn-createroom {
@@ -631,10 +640,10 @@ button {
 }
 
 .lobby ul li {
-  padding: 5px 0 5px 10%;
+  padding: 5px 0 5px 40px;
   border-bottom: 1px dashed #e0d1af;
-  background: url(images/rock-g.png) 0 0 no-repeat;
-  background-size: 10%;
+  background: url(images/rock-g.png) left top no-repeat;
+  background-size: 35px;
 }
 
 .lobby ul li:hover a {
@@ -642,6 +651,35 @@ button {
   cursor: pointer;
 }
 
+.scoreboard ul li {
+  padding: 5px 0 5px 30px;
+  background: url(images/sword.png) left 10px no-repeat;
+  background-size: 20px;
+  border-bottom: 1px solid #fff8dd;
+  position: relative;
+  padding-right: 45px;
+}
+
+.scoreboard ul li span {
+  border-radius: 10px;
+  background: #fff8dd;
+  padding: 0 5px;
+  float: right;
+  font-size: 20px;
+  color: #f44336;
+  position: absolute;
+  top: 8px;
+  right: 0;
+}
+
+.scoreboard ul li:hover a {
+  opacity: 1;
+  cursor: default;
+}
+
+.home-link {
+  text-decoration: none;
+}
 
 @media only screen  and (min-width : 992px) {
 
@@ -690,12 +728,12 @@ button {
     padding-top: 40px;
     height: 1000px;
     padding-top: 50%;
+    position: relative;
   }
 
   .lobby ul {
-    width: 800px;
     height: 34%;
-    top: 35%;
+    top: 15%;
   }
 
   .searchroom {

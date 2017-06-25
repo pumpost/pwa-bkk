@@ -1,7 +1,7 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
 import firebase from 'firebase'
-import { browserHistory } from 'react-router'
+import { browserHistory , Link} from 'react-router'
 
 import { user } from '../actions'
 // import StartMenuLayout from '../components/Layout/StartMenuLayout'
@@ -59,7 +59,7 @@ class StartGame extends Component {
         <h2><img src={flag_b} alt="pirate" /></h2>
         <ButttonStartMenu btnName="Single Mode" icName="ship" imgSrc={ship} />
         <ButttonStartMenu btnid="vsPlayer" btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} imgSrc={sword} />
-        <ButttonStartMenu btnName="Score" icName="coin" imgSrc={coin} />
+        <Link to="score-board" className="home-link"><ButttonStartMenu btnName="Score" icName="coin" imgSrc={coin} /></Link>
       </div>
     )
   }

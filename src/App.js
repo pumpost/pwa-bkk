@@ -14,6 +14,9 @@ import ScoreBoard from './containers/ScoreBoard'
 
 
 export default () => {
+  
+  Notification.requestPermission()
+
   return (
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>

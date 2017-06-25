@@ -11,6 +11,12 @@ class PreGame extends Component {
 
   constructor(props) {
     super(props)
+
+    if (!this.props.user.uid) {
+      browserHistory.push('/')
+      return
+    }
+
     this.battlefield = Array(25).fill().map(()=> 0)
     this.shipState   = []
     this.state = {

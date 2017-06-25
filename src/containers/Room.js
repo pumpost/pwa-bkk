@@ -6,16 +6,32 @@ import { room } from '../actions'
 import flag2 from '../images/flag2.png'
 import imgplayer from '../images/player.png'
 import enemy from '../images/enemy.png'
+import sword from '../images/sword.png'
 
 class Room extends Component {
 
   constructor(props) {
     super(props)
     props.roomUpdated(this.props.params.roomId, (data) => {
-      if (data.ready === 2) {
+      console.log(data)
+      if (data && data.joiner && data.joiner.uid !== this.props.user.uid) {
+        this.userJoinedNotification(data.joiner)
+      }
+      if (data && data.ready === 2) {
         browserHistory.push('/pre-game')
       }
     })
+  }
+
+  userJoinedNotification(joiner) {
+    if (Notification.permission !== "granted")  return
+    var options = {
+      body: 'เตรียมพร้อมลุยย !!',
+      icon: sword
+    }
+
+    var n = new Notification(joiner.displayName + ' has been joined!!', options);
+    setTimeout(n.close.bind(n), 5000);
   }
 
   renderReadyBtn(roomId, type, ready) {
@@ -25,7 +41,7 @@ class Room extends Component {
   }
 
   renderOwner() {
-    if (!this.props.room.owner) return ''
+    if (!this.props.room || !this.props.room.owner) return ''
     const owner = this.props.room.owner
     return (
       <div className="room-ship-player p1">
@@ -37,7 +53,7 @@ class Room extends Component {
   }
 
   renderJoiner() {
-    if (!this.props.room.joiner) return ''
+    if (!this.props.room || !this.props.room.joiner) return ''
     const joiner = this.props.room.joiner
     return (
       <div className="room-ship-player p2">

@@ -130,6 +130,7 @@ export function setShip(roomId, battlefield, type) {
     }, () => {
       dispatch({
         type: SET_SHIP,
+        payload: { data: { type: type, field: battlefield } }
       })
     })
   }

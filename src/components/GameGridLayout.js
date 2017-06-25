@@ -13,13 +13,11 @@ const genShip = (fieldId, pos, shipImg) => {
   const left = widthHeight * shipPos[0]
   const top  = widthHeight * shipPos[1]
   var d1 = document.getElementById(fieldId)
-  console.log(d1)
   const img = `<img src='${shipImg}' style='width: ${widthHeight}px; height: ${widthHeight*2-30}px; position: absolute; top: ${top}px; left: ${left}px; z-index: 1;' />`
   d1.insertAdjacentHTML('beforeend', img)
 }
 
 export default ({fieldId, ship, shipImg, handleSelectTarget}) => {
-  console.log(ship)
   let position = []
   let found = []
   for (let i in ship) {

@@ -40,24 +40,44 @@ class Game extends Component {
       this.joinerShip = ''
     }
 
+    let ownerHp  = this.props.room.owner.hp
+    let joinerHp = this.props.room.joiner.hp
+
     this.props.onEndGame(this.props.room.id, (data) => {
       if (!data) return
-
-      if (data.owner) {
-        console.log(this.props.room.joinerField)
-      } else if (data.joiner) {
-        console.log(this.props.room.ownerField)
-      }
-
-      this.toggleHidden()
+      console.log(data)
     })
 
     this.props.fireUpdated(this.props.room.id, (data) => {
       if (!data) return
-      if (data.owner) {
-        console.log(this.props.room.joinerField)
-      } else if (data.joiner) {
-        console.log(this.props.room.ownerField)
+
+      let field
+      let fire
+      let type
+      if (data.owner !== undefined) {
+        type = 'owner'
+        field = this.props.room.joinerField
+        fire  = data.owner
+      } else if (data.joiner !== undefined) {
+        type = 'joiner'
+        field = this.props.room.ownerField
+        fire  = data.joiner
+      }
+
+      for (let i=0; i< 25; i++) {
+
+        if (fire == i && field[i] !== 0) {
+          let hp
+          if (data.hasOwnProperty('owner')) {
+            hp = joinerHp = joinerHp - 2
+          } else {
+            hp = ownerHp = ownerHp - 2
+          }
+          console.log(hp)
+          if (hp <= 0) {
+            this.props.setWinner(this.props.room.id, type)
+          }
+        }
       }
 
       this.toggleHidden()
@@ -79,7 +99,6 @@ class Game extends Component {
   }
 
   fire(type) {
-    console.log(this.state.firePosition)
     if (this.firePosition === '') return
 
     if (type === 'owner') {

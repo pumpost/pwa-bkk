@@ -30,7 +30,6 @@ class PreGame extends Component {
     this.userType = 'owner'
     if (this.props.room.id !== this.props.user.uid) {
       this.userType = 'joiner'
-      console.log("====> jo", this.userType)
     }
 
     this.fieldType = this.userType + 'Field'
@@ -49,7 +48,6 @@ class PreGame extends Component {
       this.imgUser = imgEnemy
     }
 
-    console.log("userImg====>", this.imgUser)
   }
 
   handleOK() {
@@ -58,7 +56,7 @@ class PreGame extends Component {
     this.setState({
       readyToGo: true
     })
-
+    console.log(this.shipState)
     this.shipState.forEach((ele, index) => {
       ele.forEach((num) => {
         this.battlefield[num] = index + 1
@@ -115,42 +113,40 @@ class PreGame extends Component {
   }
 
   render() {
-    console.log("======", this.imgUser)
-    console.log("render userType =", this.userType)
     return (
       <div className="water-wrap" id="battle-field">
         <div className="player-info pre-game">
            <img src={this.imgUser} className="ex-ship" alt="player" /> x {this.state.shipLeft}
         </div>
-        <div className="player" id="slot1" onClick={ () => this.handleClickField(0, 0, [1,6]) }><span>1</span></div>
-        <div className="player" onClick={ () => this.handleClickField(1, 0, [2,7]) }><span>2</span></div>
-        <div className="player" onClick={ () => this.handleClickField(2, 0, [3,8]) }><span>3</span></div>
-        <div className="player" onClick={ () => this.handleClickField(3, 0, [4,9]) }><span>4</span></div>
-        <div className="player" onClick={ () => this.handleClickField(4, 0, [5,10]) }><span>5</span></div>
+        <div className="player" id="slot1" onClick={ () => this.handleClickField(0, 0, [0,5]) }><span>1</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 0, [1,6]) }><span>2</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 0, [2,7]) }><span>3</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 0, [3,8]) }><span>4</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 0, [4,9]) }><span>5</span></div>
         {/*<!-- 6 -->*/}
-        <div className="player" onClick={ () => this.handleClickField(0, 1, [6,11]) }><span>6</span></div>
-        <div className="player" onClick={ () => this.handleClickField(1, 1, [7,12]) }><span>7</span></div>
-        <div className="player" onClick={ () => this.handleClickField(2, 1, [8,13]) }><span>8</span></div>
-        <div className="player" onClick={ () => this.handleClickField(3, 1, [9,14]) }><span>9</span></div>
-        <div className="player" onClick={ () => this.handleClickField(4, 1, [10,15]) }><span>10</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 1, [5,10]) }><span>6</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 1, [6,11]) }><span>7</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 1, [7,12]) }><span>8</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 1, [8,13]) }><span>9</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 1, [9,14]) }><span>10</span></div>
         {/*<!-- 11 -->*/}
-        <div className="player" onClick={ () => this.handleClickField(0, 2, [11,16]) }><span>11</span></div>
-        <div className="player" onClick={ () => this.handleClickField(1, 2, [12,17]) }><span>12</span></div>
-        <div className="player" onClick={ () => this.handleClickField(2, 2, [13,18]) }><span>13</span></div>
-        <div className="player" onClick={ () => this.handleClickField(3, 2, [14,19]) }><span>14</span></div>
-        <div className="player" onClick={ () => this.handleClickField(4, 2, [15,20]) }><span>15</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 2, [10,15]) }><span>11</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 2, [11,16]) }><span>12</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 2, [12,17]) }><span>13</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 2, [13,18]) }><span>14</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 2, [14,19]) }><span>15</span></div>
         {/*<!-- 16 -->*/}
-        <div className="player" onClick={ () => this.handleClickField(0, 3, [16,21]) }><span>16</span></div>
-        <div className="player" onClick={ () => this.handleClickField(1, 3, [17,22]) }><span>17</span></div>
-        <div className="player" onClick={ () => this.handleClickField(2, 3, [18,23]) }><span>18</span></div>
-        <div className="player" onClick={ () => this.handleClickField(3, 3, [19,24]) }><span>19</span></div>
-        <div className="player" onClick={ () => this.handleClickField(4, 3, [20,25]) }><span>20</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 3, [15,20]) }><span>16</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 3, [16,21]) }><span>17</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 3, [17,22]) }><span>18</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 3, [18,23]) }><span>19</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 3, [19,24]) }><span>20</span></div>
         {/*<!--  21-->*/}
-        <div className="player" onClick={ () => this.handleClickField(0, 3, [16,21]) }><span>21</span></div>
-        <div className="player" onClick={ () => this.handleClickField(1, 3, [17,22]) }><span>22</span></div>
-        <div className="player" onClick={ () => this.handleClickField(2, 3, [18,23]) }><span>23</span></div>
-        <div className="player" onClick={ () => this.handleClickField(3, 3, [19,24]) }><span>24</span></div>
-        <div className="player" onClick={ () => this.handleClickField(4, 3, [20,25]) }><span>25</span></div>
+        <div className="player" onClick={ () => this.handleClickField(0, 3, [15,20]) }><span>21</span></div>
+        <div className="player" onClick={ () => this.handleClickField(1, 3, [16,21]) }><span>22</span></div>
+        <div className="player" onClick={ () => this.handleClickField(2, 3, [17,22]) }><span>23</span></div>
+        <div className="player" onClick={ () => this.handleClickField(3, 3, [18,23]) }><span>24</span></div>
+        <div className="player" onClick={ () => this.handleClickField(4, 3, [19,24]) }><span>25</span></div>
 
         {/*<div className="ship-wrap">*/}
           {/*<div className="b b1"><img src={b1} alt={b1} /></div>*/}

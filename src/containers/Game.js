@@ -73,9 +73,9 @@ class Game extends Component {
         if (fire == i && field[i] !== 0) {
           let hp
           if (data.hasOwnProperty('owner')) {
-            hp = joinerHp = joinerHp - 2
+            hp = joinerHp = joinerHp
           } else {
-            hp = ownerHp = ownerHp - 2
+            hp = ownerHp = ownerHp
           }
           console.log(hp)
           if (hp <= 0) {

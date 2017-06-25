@@ -20,9 +20,16 @@ class StartGame extends Component {
     super(props)
     this.facebookLogin = this.facebookLogin.bind(this)
     this.provider = new firebase.auth.FacebookAuthProvider()
+
   }
 
+
+
   facebookLogin() {
+
+    let d = document.getElementById("vsPlayer");
+    d.className += " overlay"
+
     firebase.auth().signInWithPopup(this.provider).then((result) => {
       // console.log(result)
       const info = {
@@ -33,6 +40,7 @@ class StartGame extends Component {
         uid: result.user.uid,
       }
       this.props.signin(info, () => {
+        d.classList.remove('overlay')
         browserHistory.push('/lobby')
       })
     }).catch((error) => {
@@ -50,7 +58,7 @@ class StartGame extends Component {
         <h1><img src={gress8} alt="pirate" />Pirate of PWA<img src={gress8} alt="pirate" /></h1>
         <h2><img src={flag_b} alt="pirate" /></h2>
         <ButttonStartMenu btnName="Single Mode" icName="ship" imgSrc={ship} />
-        <ButttonStartMenu btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} imgSrc={sword} />
+        <ButttonStartMenu btnid="vsPlayer" btnName="VS Player" icName="sword" facebookLogin={this.facebookLogin} imgSrc={sword} />
         <ButttonStartMenu btnName="Score" icName="coin" imgSrc={coin} />
       </div>
     )

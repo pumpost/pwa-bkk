@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default ({btnName, icName, facebookLogin, imgSrc }) => {
+export default ({btnName, icName, facebookLogin, imgSrc , btnid}) => {
   return(
-    <div className="btn-start btn-startmenu" onClick={facebookLogin}>
+    <div id={btnid} className="btn-start btn-startmenu" onClick={facebookLogin}>
       <img src={imgSrc} className={`i-home i-${icName}`} alt={btnName} />
         { btnName }
     </div>

@@ -79,9 +79,9 @@ class PreGame extends Component {
 
   handleHideBtn() {
     if(this.state.shipLeft < 1) {
-      return <button className="btn-start btn-pre btn-ok" onClick={this.handleOK}>Ok</button>
-    } else {
       return <button className="btn-start btn-pre btn-ok no" onClick={this.handleOK}>Wait..</button>
+    } else {
+      return <button className="btn-start btn-pre btn-ok " onClick={this.handleOK}>Ok</button>
     }
   }
 

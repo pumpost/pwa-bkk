@@ -103,8 +103,9 @@ class Game extends Component {
     return (
       <div className={this.state.ownerClass}>
         <div className="player-info">
-          <img src={imgEnemy} className="" alt={imgEnemy} />
-          &nbsp;Timer: <span className="red">10</span> sec
+          <img src={imgPlayer} className="" alt={imgPlayer} />
+          {/*&nbsp;Timer: <span className="red">10</span> sec*/}
+          &nbsp;{this.props.room.owner.displayName} Turn!!
         </div>
         <GameGridLayout ship={this.joinerShip} shipImg={imgEnemy} fieldId="joinerField"/>
         1 <input type="text" onChange={this.handleOwnerFire} value={this.state.ownerFire} className="gameinput" />
@@ -119,8 +120,8 @@ class Game extends Component {
     return (
       <div className={this.state.joinerClass}>
         <div className="player-info enemy-turn">
-          <img src={imgPlayer} className="" alt={imgPlayer} />
-          &nbsp;Enemy Turn!
+          <img src={imgEnemy} className="" alt={imgEnemy} />
+          &nbsp;{this.props.room.joiner.displayName} Turn!!
         </div>
         <GameGridLayout ship={this.ownerShip} shipImg={imgPlayer} fieldId="ownerField"/>
         2 <input type="text" onChange={this.handleJoinerFire} value={this.state.joinerFire}/> {shotBtn}

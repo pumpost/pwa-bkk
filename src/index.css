@@ -51,6 +51,8 @@ button {
   width: 100%;
 }
 
+
+
 .water-wrap:before, .water-wrap:after {
   content: "";
   width: 100%;
@@ -70,6 +72,19 @@ button {
   bottom: -110px;
 }
 
+.water-wrap.game:after {
+  bottom: -100px;
+}
+
+.water-wrap.game .btn-start.btn-pre{
+  bottom: -80px;
+}
+
+.gameinput {
+  z-index: 10;
+  position: relative;
+
+}
 
 .player {
   width: calc(100% / 5);
@@ -323,6 +338,10 @@ button {
   right: calc(100% / 3);
 }
 
+.btn-enemy {
+  color: #cf5e52;
+}
+
 .btn-back {
   color: #f44336;
 }
@@ -450,9 +469,7 @@ button {
 .player-info.enemy-turn {
   color: #cf5e52;
 }
-.enemy-turn {
-  display: none;
-}
+
 .player-info .red {
   color: #f44336;
 }

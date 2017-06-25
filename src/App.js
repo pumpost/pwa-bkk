@@ -23,12 +23,12 @@ export default () => {
         <IndexRoute component={StartMenu} />
         <Route path="lobby" component={Lobby} />
         <Route path="room/:roomId" component={Room} />
-        <Route path="game" component={Game} />
         <Route path="score" component={Score} />
         <Route path="score-board" component={ScoreBoard} />
       </Route>
       <Route path="/" components={LayoutGame}>
         <Route path="pre-game" component={PreGame} />
+        <Route path="game" component={Game} />
       </Route>
     </Router>
   )

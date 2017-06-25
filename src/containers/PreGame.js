@@ -70,7 +70,7 @@ class PreGame extends Component {
     const left = widthHeight * eleLeft
     const top  = widthHeight * eleTop
     var d1 = document.getElementById('battle-field')
-    const img = `<img src='${imgPlayer}' id="ship-${this.shipLeft}" style='width: ${widthHeight}px; height: ${widthHeight*2-30}px; position: absolute; top: ${top}px; left: ${left}px;' />`
+    const img = `<img src='${imgPlayer}' id="ship-${this.shipLeft}" style='width: ${widthHeight}px; height: ${widthHeight*2-30}px; position: absolute; top: ${top}px; left: ${left}px; z-index: 1;' />`
     d1.insertAdjacentHTML('beforeend', img)
 
     this.shipState.push(fields)

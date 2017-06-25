@@ -25,16 +25,15 @@ class Game extends Component {
       joinerFire: ''
     }
 
-    this.userType = 'owner'
     if (this.props.room.id !== this.props.user.uid) {
-      this.userType = 'joiner'
+      this.userType   = 'joiner'
+      this.joinerShip = this.props.room.joinerField
+      this.ownerShip  = ''
+    } else {
+      this.userType = 'owner'
+      this.ownerShip  = this.props.room.ownerField
+      this.joinerShip = ''
     }
-
-    // if () {
-    //
-    // } else {
-    //
-    // }
 
     this.toggleHidden = this.toggleHidden.bind(this)
     this.renderOwnerTurn  = this.renderOwnerTurn.bind(this)
@@ -104,10 +103,10 @@ class Game extends Component {
     return (
       <div className={this.state.ownerClass}>
         <div className="player-info">
-          <img src={imgPlayer} className="" alt={imgPlayer} />
+          <img src={imgEnemy} className="" alt={imgEnemy} />
           &nbsp;Timer: <span className="red">10</span> sec
         </div>
-        <GameGridLayout />
+        <GameGridLayout ship={this.joinerShip} shipImg={imgEnemy} fieldId="joinerField"/>
         1 <input type="text" onChange={this.handleOwnerFire} value={this.state.ownerFire} className="gameinput" />
         {shotBtn}
       </div>
@@ -120,10 +119,10 @@ class Game extends Component {
     return (
       <div className={this.state.joinerClass}>
         <div className="player-info enemy-turn">
-          <img src={imgEnemy} className="" alt={imgEnemy} />
+          <img src={imgPlayer} className="" alt={imgPlayer} />
           &nbsp;Enemy Turn!
         </div>
-        <GameGridLayout />
+        <GameGridLayout ship={this.ownerShip} shipImg={imgPlayer} fieldId="ownerField"/>
         2 <input type="text" onChange={this.handleJoinerFire} value={this.state.joinerFire}/> {shotBtn}
       </div>
     )

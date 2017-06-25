@@ -12,9 +12,10 @@ class Room extends Component {
 
   constructor(props) {
     super(props)
+    this.noti = true
     props.roomUpdated(this.props.params.roomId, (data) => {
       console.log(data)
-      if (data && data.joiner && data.joiner.uid !== this.props.user.uid) {
+      if (data && data.joiner && data.joiner.uid !== this.props.user.uid && this.noti) {
         this.userJoinedNotification(data.joiner)
       }
       if (data && data.ready === 2) {
@@ -32,6 +33,7 @@ class Room extends Component {
 
     var n = new Notification(joiner.displayName + ' has been joined!!', options);
     setTimeout(n.close.bind(n), 5000);
+    this.noti = false
   }
 
   renderReadyBtn(roomId, type, ready) {

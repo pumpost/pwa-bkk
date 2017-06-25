@@ -42,7 +42,7 @@ class PreGame extends Component {
 
     this.shipState.forEach((ele, index) => {
       ele.forEach((num) => {
-        this.battlefield[num] = index
+        this.battlefield[num] = index + 1
       })
     })
 
@@ -64,7 +64,7 @@ class PreGame extends Component {
     let found = false
     this.shipState.forEach(arr => {
       fields.forEach(num => {
-        if (arr.indexOf(num) !== -1) {
+        if (arr.indexOf(num + 1) !== -1) {
           found = true
         }
       })

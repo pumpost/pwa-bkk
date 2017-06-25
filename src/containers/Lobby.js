@@ -10,10 +10,6 @@ import rock_g2 from '../images/rock-g2.png'
 class Lobby extends Component {
 
   componentWillMount() {
-    if (!this.props.user.uid) {
-      browserHistory.push('/')
-      return
-    }
 
     this.props.fetchRooms()
 
@@ -22,6 +18,11 @@ class Lobby extends Component {
   }
 
   createRoom() {
+    if (!this.props.user.uid) {
+      browserHistory.push('/')
+      return
+    }
+
     const roomInfo = {
       id: this.props.user.uid,
       owner: {

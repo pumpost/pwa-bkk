@@ -25,6 +25,13 @@ class Game extends Component {
       joinerFire: ''
     }
 
+    this.toggleHidden = this.toggleHidden.bind(this)
+    this.renderOwnerTurn  = this.renderOwnerTurn.bind(this)
+    this.renderJoinerTurn = this.renderJoinerTurn.bind(this)
+    this.fire = this.fire.bind(this)
+    this.handleOwnerFire = this.handleOwnerFire.bind(this)
+    this.handleJoinerFire = this.handleJoinerFire.bind(this)
+
     if (this.props.room.id !== this.props.user.uid) {
       this.userType   = 'joiner'
       this.joinerShip = this.props.room.joinerField
@@ -35,24 +42,9 @@ class Game extends Component {
       this.joinerShip = ''
     }
 
-    this.toggleHidden = this.toggleHidden.bind(this)
-    this.renderOwnerTurn  = this.renderOwnerTurn.bind(this)
-    this.renderJoinerTurn = this.renderJoinerTurn.bind(this)
-    this.fire = this.fire.bind(this)
-    this.handleOwnerFire = this.handleOwnerFire.bind(this)
-    this.handleJoinerFire = this.handleJoinerFire.bind(this)
+    this.props.onEndGame(this.props.room.id, (data) => {
+      if (!data) return
 
-    // this.props.onEndGame(this.props.room.id, (data) => {
-    //   if (data.owner) {
-    //     console.log(this.props.room.joinerField)
-    //   } else if (data.joiner) {
-    //     console.log(this.props.room.ownerField)
-    //   }
-    //
-    //   this.toggleHidden()
-    // })
-
-    this.props.fireUpdated(this.props.room.id, (data) => {
       if (data.owner) {
         console.log(this.props.room.joinerField)
       } else if (data.joiner) {
@@ -62,6 +54,28 @@ class Game extends Component {
       this.toggleHidden()
     })
 
+    this.props.fireUpdated(this.props.room.id, (data) => {
+      if (!data) return
+      if (data.owner) {
+        console.log(this.props.room.joinerField)
+      } else if (data.joiner) {
+        console.log(this.props.room.ownerField)
+      }
+
+      this.toggleHidden()
+    })
+
+  }
+
+  handleSelectTarget(position, e) {
+
+    let x = document.getElementsByClassName("player")
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.border = '1px solid rgb(141, 218, 241)'
+    }
+
+    e.currentTarget.style.border = '2px solid red'
+    console.log(position)
   }
 
   fire(type) {
@@ -99,7 +113,12 @@ class Game extends Component {
 
   renderOwnerTurn() {
     let shotBtn = <button className="btn-start btn-pre btn-ok btn-shoot" onClick={ () => this.fire('owner') }>Fire</button>
-    if (this.userType === 'joiner') shotBtn = ''
+    let handleSelectTarget = this.handleSelectTarget
+    if (this.userType === 'joiner') {
+      shotBtn = ''
+      handleSelectTarget = () => {}
+    }
+
     return (
       <div className={this.state.ownerClass}>
         <div className="player-info">
@@ -107,8 +126,12 @@ class Game extends Component {
           {/*&nbsp;Timer: <span className="red">10</span> sec*/}
           &nbsp;{this.props.room.owner.displayName} Turn!!
         </div>
-        <GameGridLayout ship={this.joinerShip} shipImg={imgEnemy} fieldId="joinerField"/>
-        1 <input type="text" onChange={this.handleOwnerFire} value={this.state.ownerFire} className="gameinput" />
+        <GameGridLayout
+          ship={this.joinerShip}
+          shipImg={imgEnemy}
+          fieldId="joinerField"
+          handleSelectTarget={handleSelectTarget}
+        />
         {shotBtn}
       </div>
     )
@@ -116,15 +139,24 @@ class Game extends Component {
 
   renderJoinerTurn() {
     let shotBtn = <button className="btn-start btn-pre btn-ok btn-shoot btn-enemy" onClick={ () => this.fire('joiner') }>Fire</button>
-    if (this.userType === 'owner') shotBtn = ''
+    let handleSelectTarget = this.handleSelectTarget
+    if (this.userType === 'owner') {
+      shotBtn = ''
+      handleSelectTarget = () => {}
+    }
     return (
       <div className={this.state.joinerClass}>
         <div className="player-info enemy-turn">
           <img src={imgEnemy} className="" alt={imgEnemy} />
           &nbsp;{this.props.room.joiner.displayName} Turn!!
         </div>
-        <GameGridLayout ship={this.ownerShip} shipImg={imgPlayer} fieldId="ownerField"/>
-        2 <input type="text" onChange={this.handleJoinerFire} value={this.state.joinerFire}/> {shotBtn}
+        <GameGridLayout
+          ship={this.ownerShip}
+          shipImg={imgPlayer}
+          fieldId="ownerField"
+          handleSelectTarget={handleSelectTarget}
+        />
+        {shotBtn}
       </div>
     )
   }

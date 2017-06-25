@@ -18,7 +18,7 @@ const genShip = (fieldId, pos, shipImg) => {
   d1.insertAdjacentHTML('beforeend', img)
 }
 
-export default ({fieldId, ship, shipImg}) => {
+export default ({fieldId, ship, shipImg, handleSelectTarget}) => {
   console.log(ship)
   let position = []
   let found = []
@@ -38,35 +38,35 @@ export default ({fieldId, ship, shipImg}) => {
 
   return (
     <div id={fieldId}>
-      <div className="player" id="slot1"><span>1</span></div>
-      <div className="player"><span>2</span></div>
-      <div className="player"><span>3</span></div>
-      <div className="player"><span>4</span></div>
-      <div className="player"><span>5</span></div>
+      <div className="player" id="slot1" onClick={handleSelectTarget.bind(this, 0)}><span>1</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 1)}><span>2</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 2)}><span>3</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 3)}><span>4</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 4)}><span>5</span></div>
       {/*<!-- 6 -->*/}
-      <div className="player"><span>6</span></div>
-      <div className="player"><span>7</span></div>
-      <div className="player"><span>8</span></div>
-      <div className="player"><span>9</span></div>
-      <div className="player"><span>10</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 5)}><span>6</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 6)}><span>7</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 7)}><span>8</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 8)}><span>9</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 9)}><span>10</span></div>
       {/*<!-- 11 -->*/}
-      <div className="player"><span>11</span></div>
-      <div className="player"><span>12</span></div>
-      <div className="player"><span>13</span></div>
-      <div className="player"><span>14</span></div>
-      <div className="player"><span>15</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 10)}><span>11</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 11)}><span>12</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 12)}><span>13</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 13)}><span>14</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 14)}><span>15</span></div>
       {/*<!-- 16 -->*/}
-      <div className="player"><span>16</span></div>
-      <div className="player"><span>17</span></div>
-      <div className="player"><span>18</span></div>
-      <div className="player"><span>19</span></div>
-      <div className="player"><span>20</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 15)}><span>16</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 16)}><span>17</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 17)}><span>18</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 18)}><span>19</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 19)}><span>20</span></div>
       {/*<!--  21-->*/}
-      <div className="player"><span>21</span></div>
-      <div className="player"><span>22</span></div>
-      <div className="player"><span>23</span></div>
-      <div className="player"><span>24</span></div>
-      <div className="player"><span>25</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 20)}><span>21</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 21)}><span>22</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 22)}><span>23</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 23)}><span>24</span></div>
+      <div className="player" onClick={handleSelectTarget.bind(this, 24)}><span>25</span></div>
     </div>
   )
 }

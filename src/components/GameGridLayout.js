@@ -7,8 +7,8 @@ const shipMapTable = [
   [0,3],[1,3],[2,3],[3,3],[4,3],
 ]
 
-const genShip = (fieldId, pos, shipImg) => {
-  const widthHeight = document.getElementById('slot1').offsetWidth
+const genShip = (fieldId, pos, shipImg, type) => {
+  const widthHeight = document.getElementById(type + '-slot1').offsetWidth
   const shipPos = shipMapTable[pos]
   const left = widthHeight * shipPos[0]
   const top  = widthHeight * shipPos[1]
@@ -17,7 +17,7 @@ const genShip = (fieldId, pos, shipImg) => {
   d1.insertAdjacentHTML('beforeend', img)
 }
 
-export default ({fieldId, ship, shipImg, handleSelectTarget}) => {
+export default ({fieldId, ship, shipImg, handleSelectTarget, type, fire}) => {
   let position = []
   let found = []
   for (let i in ship) {
@@ -30,41 +30,25 @@ export default ({fieldId, ship, shipImg, handleSelectTarget}) => {
 
   setTimeout(() => {
     position.forEach((pos) => {
-      genShip(fieldId, pos, shipImg)
+      genShip(fieldId, pos, shipImg, type)
     })
   }, 1500)
 
+  const mark = []
+  for (let index in fire) {
+    if(fire[index].hasOwnProperty(type)) {
+      mark.push(fire[index][type])
+    }
+  }
+
+  const cssClass = "player " + "player-" + type
   return (
     <div id={fieldId}>
-      <div className="player" id="slot1" onClick={handleSelectTarget.bind(this, 0)}><span>1</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 1)}><span>2</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 2)}><span>3</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 3)}><span>4</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 4)}><span>5</span></div>
-      {/*<!-- 6 -->*/}
-      <div className="player" onClick={handleSelectTarget.bind(this, 5)}><span>6</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 6)}><span>7</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 7)}><span>8</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 8)}><span>9</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 9)}><span>10</span></div>
-      {/*<!-- 11 -->*/}
-      <div className="player" onClick={handleSelectTarget.bind(this, 10)}><span>11</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 11)}><span>12</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 12)}><span>13</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 13)}><span>14</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 14)}><span>15</span></div>
-      {/*<!-- 16 -->*/}
-      <div className="player" onClick={handleSelectTarget.bind(this, 15)}><span>16</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 16)}><span>17</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 17)}><span>18</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 18)}><span>19</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 19)}><span>20</span></div>
-      {/*<!--  21-->*/}
-      <div className="player" onClick={handleSelectTarget.bind(this, 20)}><span>21</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 21)}><span>22</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 22)}><span>23</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 23)}><span>24</span></div>
-      <div className="player" onClick={handleSelectTarget.bind(this, 24)}><span>25</span></div>
+      { shipMapTable.map((arr, index) => {
+          const id = type + '-slot' + index
+          const style = (mark.indexOf(index) !== -1) ? {border: 'red solid 2px'} : {}
+          return  <div key={id} className={cssClass} style={style} id={id} onClick={handleSelectTarget.bind(this, id, index, type)}><span>{index+1}</span></div>
+      }) }
     </div>
   )
 }

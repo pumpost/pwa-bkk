@@ -14,9 +14,9 @@ class Room extends Component {
     super(props)
     this.noti = true
     props.roomUpdated(this.props.params.roomId, (data) => {
-      if (data && data.joiner && data.joiner.uid !== this.props.user.uid && this.noti) {
-        this.userJoinedNotification(data.joiner)
-      }
+      // if (data && data.joiner && data.joiner.uid !== this.props.user.uid && this.noti) {
+      //   this.userJoinedNotification(data.joiner)
+      // }
       if (data && data.ready === 2) {
         browserHistory.push('/pre-game')
       }

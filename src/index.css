@@ -648,7 +648,6 @@ button {
 
 .lobby ul li:hover a {
   opacity: 0.5;
-  cursor: pointer;
 }
 
 .scoreboard ul li {

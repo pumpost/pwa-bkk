@@ -45,71 +45,81 @@ class Game extends Component {
 
     this.props.onEndGame(this.props.room.id, (data) => {
       if (!data) return
-      let winner = this.props.room.owner.displayName
-      if (data != 'owner') {
-        winner = this.props.room.joiner.displayName
-      }
-      alert('Winer is ' + winner + '!')
+      console.log(11)
+      browserHistory.push('/congrats')
     })
 
     this.props.fireUpdated(this.props.room.id, (data) => {
-      if (!data) return
-
-      let field
-      let fire
-      let type
-      if (data.owner !== undefined) {
-        type = 'owner'
-        field = this.props.room.joinerField
-        fire  = data.owner
-      } else if (data.joiner !== undefined) {
-        type = 'joiner'
-        field = this.props.room.ownerField
-        fire  = data.joiner
-      }
-
-      for (let i=0; i< 25; i++) {
-
-        if (fire == i && field[i] !== 0) {
-          let hp
-          if (data.hasOwnProperty('owner')) {
-            hp = joinerHp = joinerHp
-          } else {
-            hp = ownerHp = ownerHp
-          }
-          console.log(hp)
-          if (hp <= 0) {
-            this.props.setWinner(this.props.room.id, type)
-          }
-        }
-      }
-
-      this.toggleHidden()
+      console.log(ownerHp, joinerHp)
+      console.log(!data || ownerHp < 0 || joinerHp < 0)
+      browserHistory.push('/congrats')
+      // if (!data || ownerHp <= 0 || joinerHp <= 0) return
+      //
+      // let field
+      // let fire
+      // let type
+      // if (data.owner !== undefined) {
+      //   type = 'owner'
+      //   field = this.props.room.joinerField
+      //   fire  = data.owner
+      // } else if (data.joiner !== undefined) {
+      //   type = 'joiner'
+      //   field = this.props.room.ownerField
+      //   fire  = data.joiner
+      // }
+      //
+      // for (let i=0; i< 25; i++) {
+      //
+      //   if (fire == i && field[i] !== 0) {
+      //     let hp
+      //     if (data.hasOwnProperty('owner')) {
+      //       hp = joinerHp = joinerHp - 10
+      //     } else {
+      //       hp = ownerHp = ownerHp - 10
+      //     }
+      //     console.log(hp)
+      //     if (hp <= 0) {
+      //       this.props.setWinner(this.props.room.id, type)
+      //     }
+      //   }
+      // }
+      // setTimeout(() => {
+      //   this.toggleHidden()
+      // }, 500)
     })
 
   }
 
-  handleSelectTarget(position, e) {
+  handleSelectTarget(eleId, position, type) {
 
-    let x = document.getElementsByClassName("player")
+    const fire = this.props.room.fire
+    const mark = []
+    for (let index in fire) {
+      if(fire[index].hasOwnProperty(type)) {
+        mark.push(fire[index][type])
+      }
+    }
+
+    let x = document.getElementsByClassName("player-" + type)
     for (let i = 0; i < x.length; i++) {
+      if (mark.indexOf(i) !== -1) continue
       x[i].style.border = '1px solid rgb(141, 218, 241)'
     }
 
-    e.currentTarget.style.border = '2px solid red'
+    document.getElementById(eleId).style['border'] = '2px solid red'
     this.setState({
       firePosition: position
     })
   }
 
   fire(type) {
-    if (this.firePosition === '') return
-
-    if (type === 'owner') {
-      this.props.turnAction(this.props.room.id, type, this.state.firePosition)
-    } else {
-      this.props.turnAction(this.props.room.id, type, this.state.firePosition)
-    }
+    if (this.state.firePosition === '') return
+    browserHistory.push('/congrats')
+    // if (type === 'owner') {
+    //   this.props.turnAction(this.props.room.id, type, this.state.firePosition)
+    // } else {
+    //   this.props.turnAction(this.props.room.id, type, this.state.firePosition)
+    // }
 
     this.setState({
       firePosition: ''
@@ -141,10 +151,12 @@ class Game extends Component {
           &nbsp;{this.props.room.owner.displayName} Turn!!
         </div>
         <GameGridLayout
+          type="owner"
           ship={this.joinerShip}
           shipImg={imgEnemy}
           fieldId="joinerField"
           handleSelectTarget={handleSelectTarget}
+          fire={this.props.room.fire}
         />
         {shotBtn}
       </div>
@@ -165,10 +177,12 @@ class Game extends Component {
           &nbsp;{this.props.room.joiner.displayName} Turn!!
         </div>
         <GameGridLayout
+          type="joiner"
           ship={this.ownerShip}
           shipImg={imgPlayer}
           fieldId="ownerField"
           handleSelectTarget={handleSelectTarget}
+          fire={this.props.room.fire}
         />
         {shotBtn}
       </div>
